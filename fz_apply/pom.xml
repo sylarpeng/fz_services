@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.example</groupId>
+    <artifactId>fz_apply</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>fz_apply</name>
+    <description>Demo project for Spring Boot</description>
+
+    <!-- 继承说明：这里继承主工程 -->
+    <parent>
+        <groupId>com.example</groupId>
+        <artifactId>fz_services</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath><!-- lookup parent from repository -->
+    </parent>
+    <dependencies>
+        <!-- 加入其余模块的依赖 -->
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>fz_common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>fz_user</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>fz_log</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <!-- 如果是war打包方式 所以必须声明，不然默认为jar包方式 -->
+            <!--<type>war</type>-->
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <!-- 当所依赖的其他模块，有启动类的时候，需要以下配置，指定唯一启动类 -->
+                <configuration>
+                    <!-- 指定该Main Class为全局的唯一入口 -->
+                    <mainClass>com.example.fz_apply.FzApplyApplication</mainClass>
+                    <layout>ZIP</layout>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal><!--可以把依赖的包都打包到生成的Jar包中-->
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
